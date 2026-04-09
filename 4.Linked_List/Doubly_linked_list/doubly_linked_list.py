@@ -27,24 +27,38 @@ class DoublyLinkedList:
         else:
             current = self.head
             while current.next:
-                current = current.next      # Find the last node
-            current.next = new_node         # Connect last node to new node    
-            new_node.prev = current         # Connect new node back to last node
+                current = current.next  # Find the last node
+            current.next = new_node  # Connect last node to new node
+            new_node.prev = current  # Connect new node back to last node
 
-    # Insert at any Position of doubly linked List
+    # Insert at any Position of doubly linked List, [TC -> O(N), SC-> O(1)]
     def insert_at(self, val, position):
         new_node = Node(val)
         if position == 0:
             self.insert_at_head(val)
             return
-        
+
         current = self.head
         count = 0
         while current and count < position - 1:
             current = current.next
             count += 1
-        new_node.next = current.next
-        new_node.prev = current
+        
+        if current is None:
+            print("Position out of bounds")
+            return
+        
+        new_node.next = current.next             # Connect new node to next node
+        new_node.prev = current                  # Connect new node to current node    
         if current.next:
-            current.next.prev = new_node
-        current.next = new_node
+            current.next.prev = new_node         # Update next node's prev pointer
+        current.next = new_node                  # Connect current node to new node   
+
+"""
+Task -
+
+traversal()
+delete_head()
+delete_last()
+delete_in_between()
+"""
